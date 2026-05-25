@@ -4,7 +4,7 @@ const links = [
   { label: 'Intro', href: '#intro' },
   { label: 'Details', href: '#details' },
   { label: 'Story', href: '#story' },
-  { label: 'RSVP', href: '#rsvp' },
+//   { label: 'RSVP', href: '#rsvp' },
 ]
 
 const Navbar = () => (
