@@ -4,13 +4,11 @@ import EventDetailsSection from './sections/EventDetailsSection'
 import FooterSection from './sections/FooterSection'
 import GallerySection from './sections/GallerySection'
 import IntroSection from './sections/IntroSection'
-import LoveStorySection from './sections/LoveStorySection'
-import RSVPSection from './sections/RSVPSection'
 import TitleSection from './sections/TitleSection'
 
 function App() {
   const activeSlide = useCinematicScroll()
-  const slideLabels = ['Intro', 'Title', 'Details', 'Story', 'Gallery', 'RSVP', 'Farewell']
+  const slideLabels = ['Intro', 'Title', 'Details', 'Gallery', 'Farewell']
 
   return (
     <div className="relative overflow-x-hidden bg-ivory text-ink">
@@ -32,13 +30,7 @@ function App() {
             <EventDetailsSection />
           </div>
           <div className="slide-panel h-full w-screen shrink-0">
-            <LoveStorySection />
-          </div>
-          <div className="slide-panel h-full w-screen shrink-0">
             <GallerySection />
-          </div>
-          <div className="slide-panel h-full w-screen shrink-0">
-            <RSVPSection />
           </div>
           <div className="slide-panel h-full w-screen shrink-0">
             <FooterSection />
