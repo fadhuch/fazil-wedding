@@ -1,126 +1,147 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export const useCinematicScroll = () => {
+  const [activeSlide, setActiveSlide] = useState(0)
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.utils.toArray('.section-bg-parallax').forEach((bg) => {
-        gsap.to(bg, {
-          yPercent: 12,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: bg.closest('section'),
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.8,
+      const shell = document.querySelector('.horizontal-shell')
+      const track = document.querySelector('.horizontal-track')
+      const slides = gsap.utils.toArray('.slide-panel')
+
+      if (!shell || !track || slides.length === 0) return
+
+      const getDistance = () => Math.max(track.scrollWidth - window.innerWidth, 0)
+
+      const horizontalTween = gsap.to(track, {
+        x: () => -getDistance(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: shell,
+          pin: true,
+          scrub: 0.9,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          snap: {
+            snapTo: 1 / Math.max(slides.length - 1, 1),
+            duration: { min: 0.18, max: 0.75 },
+            delay: 0.04,
+            ease: 'power1.inOut',
           },
-        })
+          end: () => `+=${getDistance()}`,
+          onUpdate: (self) => {
+            const nextIndex = Math.min(slides.length - 1, Math.round(self.progress * (slides.length - 1)))
+            setActiveSlide(nextIndex)
+          },
+        },
       })
 
-      gsap.utils.toArray('.cinematic-section').forEach((section) => {
-        const revealNodes = section.querySelectorAll('.reveal-up')
+      slides.forEach((slide) => {
+        const revealNodes = slide.querySelectorAll('.reveal-up')
         if (revealNodes.length) {
           gsap.from(revealNodes, {
-            y: 56,
+            y: 48,
             opacity: 0,
-            duration: 1,
+            duration: 0.9,
             ease: 'power3.out',
-            stagger: 0.12,
+            stagger: 0.1,
             scrollTrigger: {
-              trigger: section,
-              start: 'top 78%',
+              trigger: slide,
+              containerAnimation: horizontalTween,
+              start: 'left 72%',
+              end: 'right 32%',
             },
           })
         }
 
-        const dividerNodes = section.querySelectorAll('.divider-reveal')
+        const dividerNodes = slide.querySelectorAll('.divider-reveal')
         if (dividerNodes.length) {
           gsap.from(dividerNodes, {
             scaleX: 0,
             transformOrigin: 'center center',
-            duration: 0.9,
+            duration: 0.8,
             ease: 'power3.out',
-            stagger: 0.12,
+            stagger: 0.08,
             scrollTrigger: {
-              trigger: section,
-              start: 'top 82%',
+              trigger: slide,
+              containerAnimation: horizontalTween,
+              start: 'left 74%',
+              end: 'right 34%',
             },
           })
         }
 
-        const maskNodes = section.querySelectorAll('.mask-reveal')
+        const maskNodes = slide.querySelectorAll('.mask-reveal')
         if (maskNodes.length) {
           gsap.from(maskNodes, {
             yPercent: 120,
             duration: 1,
             ease: 'power4.out',
-            stagger: 0.14,
+            stagger: 0.12,
             scrollTrigger: {
-              trigger: section,
-              start: 'top 75%',
+              trigger: slide,
+              containerAnimation: horizontalTween,
+              start: 'left 72%',
+              end: 'right 32%',
             },
           })
         }
-      })
 
-      gsap.utils.toArray('.timeline-card').forEach((card, index) => {
-        gsap.from(card, {
-          x: index % 2 === 0 ? -24 : 24,
-          y: 28,
-          opacity: 0,
-          duration: 0.95,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 86%',
-          },
-        })
-      })
+        const cardNodes = slide.querySelectorAll('.timeline-card, .gallery-item')
+        if (cardNodes.length) {
+          gsap.from(cardNodes, {
+            y: 26,
+            opacity: 0,
+            scale: 0.96,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: slide,
+              containerAnimation: horizontalTween,
+              start: 'left 68%',
+              end: 'right 30%',
+            },
+          })
+        }
 
-      gsap.utils.toArray('.gallery-item').forEach((item, index) => {
-        gsap.from(item, {
-          y: 24,
-          opacity: 0,
-          scale: 0.95,
-          duration: 0.8,
-          delay: index * 0.03,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 92%',
-          },
-        })
-      })
+        const floatingNodes = slide.querySelectorAll('.float-deco')
+        if (floatingNodes.length) {
+          gsap.to(floatingNodes, {
+            y: -16,
+            duration: 2.8,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            stagger: 0.2,
+          })
+        }
 
-      gsap.to('.float-deco', {
-        y: -16,
-        duration: 2.8,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        stagger: 0.25,
-      })
-
-      gsap.to('.intro-zoom', {
-        scale: 1.08,
-        duration: 11,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#intro',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        },
+        const introZoom = slide.querySelector('.intro-zoom')
+        if (introZoom) {
+          gsap.to(introZoom, {
+            scale: 1.08,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: slide,
+              containerAnimation: horizontalTween,
+              start: 'left 92%',
+              end: 'right 8%',
+              scrub: 1,
+            },
+          })
+        }
       })
 
       gsap.from('.scroll-hint', {
         opacity: 0,
         y: 10,
         duration: 0.8,
-        delay: 0.7,
+        delay: 0.5,
       })
 
       ScrollTrigger.normalizeScroll(true)
@@ -131,4 +152,6 @@ export const useCinematicScroll = () => {
       ctx.revert()
     }
   }, [])
+
+  return activeSlide
 }

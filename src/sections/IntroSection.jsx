@@ -1,4 +1,4 @@
-import { HiChevronDoubleDown } from 'react-icons/hi2'
+import { HiChevronDoubleRight } from 'react-icons/hi2'
 
 const particles = Array.from({ length: 14 }, (_, index) => ({
   id: index,
@@ -50,7 +50,7 @@ const IntroSection = () => (
 
     <a href="#title" className="scroll-hint absolute bottom-7 left-1/2 inline-flex -translate-x-1/2 flex-col items-center gap-1 text-[11px] uppercase tracking-[0.24em] text-ink/70">
       Scroll
-      <HiChevronDoubleDown size={18} />
+      <HiChevronDoubleRight size={18} />
     </a>
   </section>
 )
