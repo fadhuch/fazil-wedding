@@ -1,0 +1,111 @@
+import { useState } from 'react'
+import SectionTitle from '../components/SectionTitle'
+
+const initialState = {
+  name: '',
+  guests: '1',
+  attending: 'Attending',
+}
+
+const RSVPSection = () => {
+  const [formData, setFormData] = useState(initialState)
+
+  const onChange = (event) => {
+    const { name, value } = event.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    if (!formData.name.trim()) return
+
+    const message = encodeURIComponent(
+      `Wedding RSVP\nName: ${formData.name}\nGuests: ${formData.guests}\nStatus: ${formData.attending}`,
+    )
+
+    window.open(`https://wa.me/919999999999?text=${message}`, '_blank', 'noopener,noreferrer')
+  }
+
+  const onEmailFallback = () => {
+    if (!formData.name.trim()) return
+
+    const subject = encodeURIComponent('Wedding RSVP - Fazil & Asha')
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nGuests: ${formData.guests}\nStatus: ${formData.attending}`,
+    )
+    window.location.href = `mailto:wedding@example.com?subject=${subject}&body=${body}`
+  }
+
+  return (
+    <section id="rsvp" className="cinematic-section relative min-h-screen snap-start px-4 py-20 md:py-24">
+      <div className="mx-auto max-w-xl">
+        <SectionTitle
+          eyebrow="RSVP"
+          title="Join Our Celebration"
+          subtitle="Kindly confirm your presence with love."
+        />
+
+        <form onSubmit={onSubmit} className="glass-card reveal-up rounded-[2rem] border border-white/65 bg-white/50 p-6 shadow-soft backdrop-blur-2xl md:p-8">
+          <label className="mb-4 block">
+            <span className="mb-2 block text-sm text-ink/75">Name</span>
+            <input
+              type="text"
+              name="name"
+              required
+              value={formData.name}
+              onChange={onChange}
+              className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
+              placeholder="Your full name"
+            />
+          </label>
+
+          <label className="mb-4 block">
+            <span className="mb-2 block text-sm text-ink/75">Number of Guests</span>
+            <select
+              name="guests"
+              value={formData.guests}
+              onChange={onChange}
+              className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+
+          <label className="mb-6 block">
+            <span className="mb-2 block text-sm text-ink/75">Attendance</span>
+            <select
+              name="attending"
+              value={formData.attending}
+              onChange={onChange}
+              className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
+            >
+              <option value="Attending">Attending</option>
+              <option value="Not Attending">Not Attending</option>
+            </select>
+          </label>
+
+          <div className="flex flex-col gap-3">
+            <button
+              type="submit"
+              className="rounded-full bg-gradient-to-r from-champagne to-gold px-5 py-3 text-sm font-medium uppercase tracking-[0.15em] text-white"
+            >
+              RSVP via WhatsApp
+            </button>
+            <button
+              type="button"
+              onClick={onEmailFallback}
+              className="rounded-full border border-gold/40 bg-white/70 px-5 py-3 text-sm font-medium uppercase tracking-[0.15em] text-gold"
+            >
+              Email Fallback
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  )
+}
+
+export default RSVPSection

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    font-family: 'Poppins', sans-serif;
+    background: #f8f4ec;
+    color: #2d2721;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .mask-reveal > * {
+    display: block;
+  }
+}
+
+@keyframes floatDrift {
+  from {
+    transform: translateY(0px);
+    opacity: 0.25;
+  }
+  to {
+    transform: translateY(-24px);
+    opacity: 0.85;
+  }
+}
