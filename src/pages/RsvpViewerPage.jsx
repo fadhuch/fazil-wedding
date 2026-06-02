@@ -14,6 +14,11 @@ const formatDate = (value) => {
   }).format(date)
 }
 
+const normalizeAttendingEvent = (value) => {
+  const attendingEvent = String(value || '').trim()
+  return attendingEvent === 'Nothing' ? 'Not Attending' : attendingEvent
+}
+
 const RsvpViewerPage = () => {
   const [guests, setGuests] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -52,6 +57,28 @@ const RsvpViewerPage = () => {
     [guests],
   )
 
+  const attendingCounts = useMemo(() => {
+    const counts = {
+      Nikkah: 0,
+      Wedding: 0,
+      Both: 0,
+      'Not Attending': 0,
+      Other: 0,
+    }
+
+    guests.forEach((item) => {
+      const attendingEvent = normalizeAttendingEvent(item.attendingEvent)
+
+      if (Object.prototype.hasOwnProperty.call(counts, attendingEvent)) {
+        counts[attendingEvent] += 1
+      } else {
+        counts.Other += 1
+      }
+    })
+
+    return counts
+  }, [guests])
+
   return (
     <main className="min-h-screen bg-ivory px-4 py-10 text-ink md:py-14">
       <div className="mx-auto w-full max-w-6xl">
@@ -89,6 +116,26 @@ const RsvpViewerPage = () => {
               Total Guests: <strong>{totalGuests}</strong>
             </span>
           </div>
+
+          <div className="mt-3 flex flex-wrap gap-3 text-xs uppercase tracking-[0.15em]">
+            <span className="rounded-full bg-white/80 px-4 py-2 text-ink/80">
+              Nikkah: <strong>{attendingCounts.Nikkah}</strong>
+            </span>
+            <span className="rounded-full bg-white/80 px-4 py-2 text-ink/80">
+              Wedding: <strong>{attendingCounts.Wedding}</strong>
+            </span>
+            <span className="rounded-full bg-white/80 px-4 py-2 text-ink/80">
+              Both: <strong>{attendingCounts.Both}</strong>
+            </span>
+            <span className="rounded-full bg-white/80 px-4 py-2 text-ink/80">
+              Not Attending: <strong>{attendingCounts['Not Attending']}</strong>
+            </span>
+            {attendingCounts.Other > 0 ? (
+              <span className="rounded-full bg-white/80 px-4 py-2 text-ink/80">
+                Other: <strong>{attendingCounts.Other}</strong>
+              </span>
+            ) : null}
+          </div>
         </div>
 
         {errorMessage ? (
@@ -115,7 +162,7 @@ const RsvpViewerPage = () => {
                 <div className="flex items-start justify-between gap-3">
                   <h2 className="font-heading text-2xl text-gold">{guest.name || 'Unknown Guest'}</h2>
                   <span className="rounded-full bg-white/80 px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-ink/70">
-                    {guest.attendingEvent || 'N/A'}
+                    {normalizeAttendingEvent(guest.attendingEvent) || 'N/A'}
                   </span>
                 </div>
 

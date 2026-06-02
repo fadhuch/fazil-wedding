@@ -90,7 +90,7 @@ const RSVPSection = () => {
               <option value="Nikkah">Nikkah</option>
               <option value="Wedding">Wedding</option>
               <option value="Both">Both</option>
-              <option value="Nothing">Nothing</option>
+              <option value="Not Attending">Not Attending</option>
             </select>
           </label>
 
