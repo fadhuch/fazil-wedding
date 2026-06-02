@@ -4,7 +4,8 @@ import SectionTitle from '../components/SectionTitle'
 const initialState = {
   name: '',
   guests: '1',
-  attending: 'Attending',
+  attending: 'Both',
+  message: '',
 }
 
 const RSVPSection = () => {
@@ -17,24 +18,43 @@ const RSVPSection = () => {
 
   const onSubmit = (event) => {
     event.preventDefault()
-    if (!formData.name.trim()) return
+      if (!formData.name.trim()) return
 
-    const message = encodeURIComponent(
-      `Wedding RSVP\nName: ${formData.name}\nGuests: ${formData.guests}\nStatus: ${formData.attending}`,
-    )
+      let rsvpData = {
+        name: formData.name.trim(),
+        numberOfGuests: formData.guests,
+        attendingEvent: formData.attending,
+        message: formData.message.trim(),
+      }
 
-    window.open(`https://wa.me/919999999999?text=${message}`, '_blank', 'noopener,noreferrer')
+      fetch('https://api.doperfume.com/api/register-guest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rsvpData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok')
+          }
+          return response.json()
+        })
+        .then((data) => {
+            console.log('Success:', data)
+            setFormData(initialState)
+        })
+        .catch((error) => {
+          console.error('Error:', error)
+          alert('There was an error submitting your RSVP. Please try again later.')
+        })
+      
+
+
+   
   }
 
-  const onEmailFallback = () => {
-    if (!formData.name.trim()) return
 
-    const subject = encodeURIComponent('Wedding RSVP - Fazil & Asha')
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nGuests: ${formData.guests}\nStatus: ${formData.attending}`,
-    )
-    window.location.href = `mailto:wedding@example.com?subject=${subject}&body=${body}`
-  }
 
   return (
     <section id="rsvp" className="cinematic-section relative min-h-screen snap-start px-4 py-20 md:py-24">
@@ -60,6 +80,21 @@ const RSVPSection = () => {
           </label>
 
           <label className="mb-4 block">
+            <span className="mb-2 block text-sm text-ink/75">Attending</span>
+            <select
+              name="attending"
+              value={formData.attending}
+              onChange={onChange}
+              className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
+            >
+              <option value="Nikkah">Nikkah</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Both">Both</option>
+              <option value="Nothing">Nothing</option>
+            </select>
+          </label>
+
+          <label className="mb-4 block">
             <span className="mb-2 block text-sm text-ink/75">Number of Guests</span>
             <select
               name="guests"
@@ -71,35 +106,29 @@ const RSVPSection = () => {
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
+              <option value="5+">5+</option>
             </select>
           </label>
 
           <label className="mb-6 block">
-            <span className="mb-2 block text-sm text-ink/75">Attendance</span>
-            <select
-              name="attending"
-              value={formData.attending}
+            <span className="mb-2 block text-sm text-ink/75">Message to Couple</span>
+            <textarea
+                          name="message"
+                          required
+              value={formData.message}
               onChange={onChange}
+              rows={4}
+              placeholder="Share your blessings and wishes..."
               className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
-            >
-              <option value="Attending">Attending</option>
-              <option value="Not Attending">Not Attending</option>
-            </select>
+            />
           </label>
 
           <div className="flex flex-col gap-3">
             <button
               type="submit"
-              className="rounded-full bg-gradient-to-r from-champagne to-gold px-5 py-3 text-sm font-medium uppercase tracking-[0.15em] text-white"
+            className="rounded-full bg-gradient-to-r from-champagne to-gold px-5 py-3 text-sm font-medium uppercase tracking-[0.15em] text-white"
             >
-              RSVP via WhatsApp
-            </button>
-            <button
-              type="button"
-              onClick={onEmailFallback}
-              className="rounded-full border border-gold/40 bg-white/70 px-5 py-3 text-sm font-medium uppercase tracking-[0.15em] text-gold"
-            >
-              Email Fallback
+                Send RSVP
             </button>
           </div>
         </form>

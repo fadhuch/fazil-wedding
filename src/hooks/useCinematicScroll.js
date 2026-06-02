@@ -9,56 +9,55 @@ export const useCinematicScroll = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const shell = document.querySelector('.horizontal-shell')
-      const track = document.querySelector('.horizontal-track')
-      const slides = gsap.utils.toArray('.slide-panel')
+      const sections = gsap.utils.toArray('.cinematic-section')
 
-      if (!shell || !track || slides.length === 0) return
+      if (sections.length === 0) return
 
-      const getDistance = () => Math.max(track.scrollWidth - window.innerWidth, 0)
+      sections.forEach((section, index) => {
+        const isFirst = index === 0
 
-      const horizontalTween = gsap.to(track, {
-        x: () => -getDistance(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: shell,
-          pin: true,
-          scrub: 0.9,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          snap: {
-            snapTo: 1 / Math.max(slides.length - 1, 1),
-            duration: { min: 0.18, max: 0.75 },
-            delay: 0.04,
-            ease: 'power1.inOut',
-          },
-          end: () => `+=${getDistance()}`,
-          onUpdate: (self) => {
-            const nextIndex = Math.min(slides.length - 1, Math.round(self.progress * (slides.length - 1)))
-            setActiveSlide(nextIndex)
-          },
-        },
-      })
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top center',
+          end: 'bottom center',
+          onEnter: () => setActiveSlide(index),
+          onEnterBack: () => setActiveSlide(index),
+        })
 
-      slides.forEach((slide) => {
-        const revealNodes = slide.querySelectorAll('.reveal-up')
-        if (revealNodes.length) {
-          gsap.from(revealNodes, {
-            y: 48,
-            opacity: 0,
+        if (!isFirst) {
+          gsap.from(section, {
+            autoAlpha: 0,
+            y: 36,
             duration: 0.9,
             ease: 'power3.out',
-            stagger: 0.1,
             scrollTrigger: {
-              trigger: slide,
-              containerAnimation: horizontalTween,
-              start: 'left 72%',
-              end: 'right 32%',
+              trigger: section,
+              start: 'top 88%',
+              toggleActions: 'play none play reset',
             },
           })
         }
 
-        const dividerNodes = slide.querySelectorAll('.divider-reveal')
+        const appearNodes = isFirst
+          ? []
+          : [...section.querySelectorAll('.reveal-up, .gallery-item, article, li, a, button, [data-appear]')]
+
+        if (appearNodes.length) {
+          gsap.from(appearNodes, {
+            autoAlpha: 0,
+            y: 28,
+            duration: 0.75,
+            ease: 'power3.out',
+            stagger: 0.06,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 82%',
+              toggleActions: 'play none play reset',
+            },
+          })
+        }
+
+        const dividerNodes = section.querySelectorAll('.divider-reveal')
         if (dividerNodes.length) {
           gsap.from(dividerNodes, {
             scaleX: 0,
@@ -67,15 +66,14 @@ export const useCinematicScroll = () => {
             ease: 'power3.out',
             stagger: 0.08,
             scrollTrigger: {
-              trigger: slide,
-              containerAnimation: horizontalTween,
-              start: 'left 74%',
-              end: 'right 34%',
+              trigger: section,
+              start: 'top 82%',
+              toggleActions: 'play none play reset',
             },
           })
         }
 
-        const maskNodes = slide.querySelectorAll('.mask-reveal')
+        const maskNodes = section.querySelectorAll('.mask-reveal')
         if (maskNodes.length) {
           gsap.from(maskNodes, {
             yPercent: 120,
@@ -83,15 +81,14 @@ export const useCinematicScroll = () => {
             ease: 'power4.out',
             stagger: 0.12,
             scrollTrigger: {
-              trigger: slide,
-              containerAnimation: horizontalTween,
-              start: 'left 72%',
-              end: 'right 32%',
+              trigger: section,
+              start: 'top 76%',
+              toggleActions: 'play none play reset',
             },
           })
         }
 
-        const cardNodes = slide.querySelectorAll('.timeline-card, .gallery-item')
+        const cardNodes = section.querySelectorAll('.timeline-card, .gallery-item')
         if (cardNodes.length) {
           gsap.from(cardNodes, {
             y: 26,
@@ -101,15 +98,14 @@ export const useCinematicScroll = () => {
             stagger: 0.08,
             ease: 'power2.out',
             scrollTrigger: {
-              trigger: slide,
-              containerAnimation: horizontalTween,
-              start: 'left 68%',
-              end: 'right 30%',
+              trigger: section,
+              start: 'top 80%',
+              toggleActions: 'play none play reset',
             },
           })
         }
 
-        const floatingNodes = slide.querySelectorAll('.float-deco')
+        const floatingNodes = section.querySelectorAll('.float-deco')
         if (floatingNodes.length) {
           gsap.to(floatingNodes, {
             y: -16,
@@ -121,20 +117,6 @@ export const useCinematicScroll = () => {
           })
         }
 
-        const introZoom = slide.querySelector('.intro-zoom')
-        if (introZoom) {
-          gsap.to(introZoom, {
-            scale: 1.08,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: slide,
-              containerAnimation: horizontalTween,
-              start: 'left 92%',
-              end: 'right 8%',
-              scrub: 1,
-            },
-          })
-        }
       })
 
       gsap.from('.scroll-hint', {
@@ -144,11 +126,9 @@ export const useCinematicScroll = () => {
         delay: 0.5,
       })
 
-      ScrollTrigger.normalizeScroll(true)
     })
 
     return () => {
-      ScrollTrigger.normalizeScroll(false)
       ctx.revert()
     }
   }, [])

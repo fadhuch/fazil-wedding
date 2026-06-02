@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Navbar = ({ currentSlide, totalSlides, slideLabel }) => (
   <header className="fixed inset-x-0 top-0 z-50 px-4 py-4">
     <nav className="mx-auto flex w-full max-w-5xl items-center justify-between rounded-full border border-white/50 bg-white/45 px-4 py-3 shadow-soft backdrop-blur-xl md:px-6">
-      <a href="#intro" className="font-heading text-2xl text-gold">Fazil</a>
+      <a href="#intro" className="font-heading text-2xl text-gold">F & A</a>
 
       <div className="flex items-center gap-3">
         <div className="hidden min-w-[128px] flex-col items-end text-right md:flex">

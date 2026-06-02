@@ -7,45 +7,88 @@ const EventDetailsSection = () => (
 
     <div className="mx-auto flex max-w-5xl flex-col justify-center">
       <SectionTitle
-        eyebrow="Event Details"
-        title="Save the Date"
-        subtitle="Join us for a day full of prayers, joy, and celebration."
+        eyebrow="The Ceremony"
+        title="Our Sacred Celebration"
+        subtitle="Join us for Nikkah and Reception with love, prayers, and joy."
       />
 
-      <article className="reveal-up glass-card mx-auto w-full max-w-xl rounded-[2rem] border border-white/65 bg-white/45 p-6 shadow-soft backdrop-blur-2xl md:p-8">
-        <ul className="space-y-5 text-ink/85">
-          <li className="reveal-up flex items-start gap-3">
-            <HiCalendarDays className="float-deco mt-0.5 text-gold" size={20} />
-            <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Date</p>
-              <p className="mt-1 text-base">Tuesday, 22 December 2026</p>
-            </div>
-          </li>
-          <li className="reveal-up flex items-start gap-3">
-            <HiMiniClock className="float-deco mt-0.5 text-gold" size={20} />
-            <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Time</p>
-              <p className="mt-1 text-base">9:00 AM onwards</p>
-            </div>
-          </li>
-          <li className="reveal-up flex items-start gap-3">
-            <HiMapPin className="float-deco mt-0.5 text-gold" size={20} />
-            <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Venue</p>
-              <p className="mt-1 text-base">St. Mary Grand Hall, Cathedral Road, Chennai</p>
-            </div>
-          </li>
-        </ul>
+      <div className="grid gap-5 md:grid-cols-2">
+        <article className="reveal-up glass-card rounded-[2rem] border border-white/65 bg-white/45 p-6 shadow-soft backdrop-blur-2xl md:p-8">
+          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold/85">The Sacred Vow</p>
+          <h3 className="font-heading text-4xl text-ink">Nikkah Ceremony</h3>
 
-        <a
-          href="https://maps.google.com/?q=St+Mary+Grand+Hall+Cathedral+Road+Chennai"
-          target="_blank"
-          rel="noreferrer"
-          className="reveal-up mt-8 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-champagne to-gold px-6 py-3 text-sm font-medium uppercase tracking-[0.16em] text-white transition-transform hover:-translate-y-0.5"
-        >
-          Open Google Maps
-        </a>
-      </article>
+          <ul className="mt-6 space-y-5 text-ink/85">
+            <li className="reveal-up flex items-start gap-3">
+              <HiCalendarDays className="float-deco mt-0.5 text-gold" size={20} />
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Date</p>
+                <p className="mt-1 text-base">Sunday, 12th July 2026</p>
+              </div>
+            </li>
+            <li className="reveal-up flex items-start gap-3">
+              <HiMiniClock className="float-deco mt-0.5 text-gold" size={20} />
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Time</p>
+                <p className="mt-1 text-base">After Dhuhr Prayer · 1:30 PM</p>
+              </div>
+            </li>
+            <li className="reveal-up flex items-start gap-3">
+              <HiMapPin className="float-deco mt-0.5 text-gold" size={20} />
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Venue</p>
+                <p className="mt-1 text-base">Koduvally, Malappuram, Kerala</p>
+              </div>
+            </li>
+          </ul>
+
+          <a
+            href="https://maps.app.goo.gl/CzFkQkKy6vXWPp1D9?g_st=awb"
+            target="_blank"
+            rel="noreferrer"
+            className="reveal-up mt-8 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-champagne to-gold px-6 py-3 text-sm font-medium uppercase tracking-[0.16em] text-white transition-transform hover:-translate-y-0.5"
+          >
+            Nikkah Location
+          </a>
+        </article>
+
+        <article className="reveal-up glass-card rounded-[2rem] border border-white/65 bg-white/45 p-6 shadow-soft backdrop-blur-2xl md:p-8">
+          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold/85">The Grand Celebration</p>
+          <h3 className="font-heading text-4xl text-ink">Wedding Reception</h3>
+
+          <ul className="mt-6 space-y-5 text-ink/85">
+            <li className="reveal-up flex items-start gap-3">
+              <HiCalendarDays className="float-deco mt-0.5 text-gold" size={20} />
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Date</p>
+                <p className="mt-1 text-base">Monday, 13th July 2026</p>
+              </div>
+            </li>
+            <li className="reveal-up flex items-start gap-3">
+              <HiMiniClock className="float-deco mt-0.5 text-gold" size={20} />
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Time</p>
+                <p className="mt-1 text-base">6:00 PM onwards</p>
+              </div>
+            </li>
+            <li className="reveal-up flex items-start gap-3">
+              <HiMapPin className="float-deco mt-0.5 text-gold" size={20} />
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Venue</p>
+                <p className="mt-1 text-base">White Oak Castle Convention Center, Kuttippuram</p>
+              </div>
+            </li>
+          </ul>
+
+          <a
+            href="https://maps.app.goo.gl/F5CSjS3omr5ueY3X7?g_st=awb"
+            target="_blank"
+            rel="noreferrer"
+            className="reveal-up mt-8 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-champagne to-gold px-6 py-3 text-sm font-medium uppercase tracking-[0.16em] text-white transition-transform hover:-translate-y-0.5"
+          >
+            Reception Location
+          </a>
+        </article>
+      </div>
     </div>
   </section>
 )
