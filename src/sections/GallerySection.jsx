@@ -5,8 +5,6 @@ import image1 from '../assets/image1.jpeg'
 import image2 from '../assets/image2.jpeg'
 import image3 from '../assets/image3.jpeg'
 import image4 from '../assets/image4.jpeg'
-import image5 from '../assets/image5.jpeg'
-import image6 from '../assets/image6.jpeg'
 
 const images = [
     {
@@ -26,22 +24,13 @@ const images = [
     alt: 'Our story photo 2',
   },
   
-  
-  {
-    src: image5,
-    alt: 'Our story photo 5',
-    },
-  {
-    src: image6,
-    alt: 'Our story photo 6',
-  }
 ]
 
 const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
-    <section id="gallery" className="cinematic-section relative min-h-screen snap-start px-4 py-20 md:py-24">
+    <section id="gallery" className="cinematic-section relative  snap-start px-4 pt-20 md:py-24">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           eyebrow="Moments to Treasure"
