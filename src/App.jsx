@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar'
+import CandleOverlay from './components/CandleOverlay'
 import { useCinematicScroll } from './hooks/useCinematicScroll'
 import { usePreloadImages } from './hooks/usePreloadImages'
 import EventDetailsSection from './sections/EventDetailsSection'
@@ -22,6 +23,7 @@ function App({ eventType }) {
 
   return (
     <div className="relative overflow-x-hidden bg-ivory text-ink">
+      <CandleOverlay />
       <Navbar />
 
       <main className="relative">

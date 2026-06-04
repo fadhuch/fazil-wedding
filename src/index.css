@@ -38,23 +38,34 @@
   .mask-reveal > * {
     display: block;
   }
-.title-pattern-bg {
-  position: relative;
-  isolation: isolate;
-  background: #f8f4ec;
-}
+  .title-pattern-bg {
+    position: relative;
+    isolation: isolate;
+    background: #f8f4ec;
+  }
 
-.title-pattern-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  .title-pattern-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
 
-  background: url("/wedding-mandala.svg") center center / 800px no-repeat;
-  opacity: 0.04;
+    background: url("/wedding-mandala.svg") center center / 800px no-repeat;
+    opacity: 0.04;
 
-  pointer-events: none;
-  z-index: -1;
-}
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .candle-overlay {
+    pointer-events: none;
+  }
+
+  .lamp-image {
+    display: block;
+    background: transparent;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 0 6px rgba(255, 170, 80, 0.5));
+  }
 
   .wedding-pattern {
     background-color: #f8f4ec;

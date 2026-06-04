@@ -102,6 +102,47 @@ export const useCinematicScroll = () => {
         delay: 0.5,
       })
 
+      const lampNodes = gsap.utils.toArray('.lamp-deco')
+      if (lampNodes.length) {
+        lampNodes.forEach((node, index) => {
+          const riseDistance = 320 + (index % 4) * 140
+
+          gsap.to(node, {
+            y: -riseDistance,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: document.body,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 0.22,
+            },
+          })
+        })
+
+        gsap.to('.lamp-image', {
+          scale: 1.05,
+          duration: 1.2,
+          repeat: -1,
+          yoyo: true,
+          transformOrigin: '50% 50%',
+          ease: 'sine.inOut',
+          stagger: 0.1,
+        })
+
+        if (sections.length >= 3) {
+          gsap.to('.candle-overlay', {
+            autoAlpha: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: sections[2],
+              start: 'bottom bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          })
+        }
+      }
+
     })
 
     return () => {
