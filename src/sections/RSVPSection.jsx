@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import SectionTitle from '../components/SectionTitle'
+import PropTypes from 'prop-types'
 
-const initialState = {
-  name: '',
-  guests: '1',
-  attending: 'Both',
-  message: '',
-}
+const RSVPSection = ({ eventType }) => {
+  const isSingleEvent = eventType === 'Nikkah' || eventType === 'Wedding'
 
-const RSVPSection = () => {
-  const [formData, setFormData] = useState(initialState)
+  const createInitialState = () => ({
+    name: '',
+    guests: '1',
+    attending: isSingleEvent ? eventType : 'Both',
+    message: '',
+  })
+
+  const [formData, setFormData] = useState(createInitialState)
 
   const onChange = (event) => {
     const { name, value } = event.target
@@ -23,7 +26,7 @@ const RSVPSection = () => {
       let rsvpData = {
         name: formData.name.trim(),
         numberOfGuests: formData.guests,
-        attendingEvent: formData.attending,
+        attendingEvent: isSingleEvent ? eventType : formData.attending,
         message: formData.message.trim(),
       }
 
@@ -42,7 +45,7 @@ const RSVPSection = () => {
         })
         .then((data) => {
             console.log('Success:', data)
-            setFormData(initialState)
+          setFormData(createInitialState())
         })
         .catch((error) => {
           console.error('Error:', error)
@@ -79,20 +82,32 @@ const RSVPSection = () => {
             />
           </label>
 
-          <label className="mb-4 block">
-            <span className="mb-2 block text-sm text-ink/75">Attending</span>
-            <select
-              name="attending"
-              value={formData.attending}
-              onChange={onChange}
-              className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
-            >
-              <option value="Nikkah">Nikkah</option>
-              <option value="Wedding">Wedding</option>
-              <option value="Both">Both</option>
-              <option value="Not Attending">Not Attending</option>
-            </select>
-          </label>
+          {isSingleEvent ? (
+            <label className="mb-4 block">
+              <span className="mb-2 block text-sm text-ink/75">Attending</span>
+              <input
+                type="text"
+                value={eventType}
+                readOnly
+                className="w-full rounded-xl border border-stone-200/90 bg-white/60 px-4 py-3 text-sm text-ink/80 outline-none"
+              />
+            </label>
+          ) : (
+            <label className="mb-4 block">
+              <span className="mb-2 block text-sm text-ink/75">Attending</span>
+              <select
+                name="attending"
+                value={formData.attending}
+                onChange={onChange}
+                className="w-full rounded-xl border border-stone-200/90 bg-white/80 px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-gold/30"
+              >
+                <option value="Nikkah">Nikkah</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Both">Both</option>
+                <option value="Not Attending">Not Attending</option>
+              </select>
+            </label>
+          )}
 
           <label className="mb-4 block">
             <span className="mb-2 block text-sm text-ink/75">Number of Guests</span>
@@ -135,6 +150,14 @@ const RSVPSection = () => {
       </div>
     </section>
   )
+}
+
+RSVPSection.propTypes = {
+  eventType: PropTypes.oneOf(['both', 'Nikkah', 'Wedding']),
+}
+
+RSVPSection.defaultProps = {
+  eventType: 'both',
 }
 
 export default RSVPSection

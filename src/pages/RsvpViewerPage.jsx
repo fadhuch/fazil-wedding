@@ -92,7 +92,7 @@ const RsvpViewerPage = () => {
 
             <div className="flex items-center gap-3">
               <a
-                href="/"
+                href="/invitation/2026"
                 className="rounded-full border border-stone-300/80 bg-white/80 px-5 py-2 text-xs font-medium uppercase tracking-[0.15em] text-ink"
               >
                 Back to Invitation

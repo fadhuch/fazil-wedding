@@ -6,10 +6,12 @@ import GallerySection from './sections/GallerySection'
 import IntroSection from './sections/IntroSection'
 import RSVPSection from './sections/RSVPSection'
 import TitleSection from './sections/TitleSection'
+import PropTypes from 'prop-types'
 
-function App() {
+function App({ eventType }) {
   const activeSlide = useCinematicScroll()
-  const slideLabels = ['Invitation', 'Wedding Title', 'Ceremony', 'Our Story', 'RSVP', 'Closing']
+  const ceremonySlideLabel = eventType === 'Nikkah' ? 'Nikkah' : eventType === 'Wedding' ? 'Reception' : 'Ceremony'
+  const slideLabels = ['Invitation', 'Wedding Title', ceremonySlideLabel, 'Our Story', 'RSVP', 'Closing']
 
   return (
     <div className="relative overflow-x-hidden bg-ivory text-ink">
@@ -20,15 +22,23 @@ function App() {
       />
 
       <main className="relative">
-        <IntroSection />
+        <IntroSection eventType={eventType} />
         <TitleSection />
-        <EventDetailsSection />
+        <EventDetailsSection eventType={eventType} />
         <GallerySection />
-        <RSVPSection />
-        <FooterSection />
+        <RSVPSection eventType={eventType} />
+        <FooterSection eventType={eventType} />
       </main>
     </div>
   )
+}
+
+App.propTypes = {
+  eventType: PropTypes.oneOf(['both', 'Nikkah', 'Wedding']),
+}
+
+App.defaultProps = {
+  eventType: 'both',
 }
 
 export default App
