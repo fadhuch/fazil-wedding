@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/invitation/2026",
+      "destination": "/invitation-2026.html"
+    },
+    {
+      "source": "/nikkah-invitation/9346",
+      "destination": "/nikkah-invitation-9346.html"
+    },
+    {
+      "source": "/reception-invitation/2122",
+      "destination": "/reception-invitation-2122.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
