@@ -105,7 +105,7 @@ export const useCinematicScroll = () => {
       const lampNodes = gsap.utils.toArray('.lamp-deco')
       if (lampNodes.length) {
         lampNodes.forEach((node, index) => {
-          const riseDistance = 320 + (index % 4) * 140
+          const riseDistance = 460 + (index % 4) * 180
 
           gsap.to(node, {
             y: -riseDistance,
@@ -114,7 +114,8 @@ export const useCinematicScroll = () => {
               trigger: document.body,
               start: 'top top',
               end: 'bottom bottom',
-              scrub: 0.22,
+              scrub: 0.12,
+              invalidateOnRefresh: true,
             },
           })
         })
