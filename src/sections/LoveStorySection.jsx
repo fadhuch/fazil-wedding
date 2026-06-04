@@ -24,7 +24,7 @@ const storyItems = [
 ]
 
 const LoveStorySection = () => (
-  <section id="story" className="cinematic-section relative min-h-screen snap-start px-4 py-20 md:py-24">
+  <section id="story" className="cinematic-section wedding-pattern relative min-h-screen snap-start px-4 py-20 md:py-24">
     <div className="mx-auto max-w-5xl">
       <SectionTitle
         eyebrow="Love Story"

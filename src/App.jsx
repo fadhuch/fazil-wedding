@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import { useCinematicScroll } from './hooks/useCinematicScroll'
+import { usePreloadImages } from './hooks/usePreloadImages'
 import EventDetailsSection from './sections/EventDetailsSection'
 import FooterSection from './sections/FooterSection'
 import GallerySection from './sections/GallerySection'
@@ -7,19 +8,21 @@ import IntroSection from './sections/IntroSection'
 import RSVPSection from './sections/RSVPSection'
 import TitleSection from './sections/TitleSection'
 import PropTypes from 'prop-types'
+import bgImage from './assets/bg4.jpeg'
+import image1 from './assets/image1.jpeg'
+import image2 from './assets/image2.jpeg'
+import image3 from './assets/image3.jpeg'
+import image4 from './assets/image4.jpeg'
+
+const invitationImages = [bgImage, image1, image2, image3, image4]
 
 function App({ eventType }) {
-  const activeSlide = useCinematicScroll()
-  const ceremonySlideLabel = eventType === 'Nikkah' ? 'Nikkah' : eventType === 'Wedding' ? 'Reception' : 'Ceremony'
-  const slideLabels = ['Invitation', 'Wedding Title', ceremonySlideLabel, 'Our Story', 'RSVP', 'Closing']
+  useCinematicScroll()
+  usePreloadImages(invitationImages)
 
   return (
     <div className="relative overflow-x-hidden bg-ivory text-ink">
-      <Navbar
-        currentSlide={activeSlide}
-        totalSlides={slideLabels.length}
-        slideLabel={slideLabels[activeSlide]}
-      />
+      <Navbar />
 
       <main className="relative">
         <IntroSection eventType={eventType} />

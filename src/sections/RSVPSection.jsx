@@ -60,7 +60,7 @@ const RSVPSection = ({ eventType }) => {
 
 
   return (
-    <section id="rsvp" className="cinematic-section relative min-h-screen snap-start px-4 py-20 md:py-24">
+    <section id="rsvp" className="cinematic-section wedding-pattern relative min-h-screen snap-start px-4 py-20 md:py-24">
       <div className="mx-auto max-w-xl">
         <SectionTitle
           eyebrow="RSVP"

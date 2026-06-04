@@ -38,6 +38,29 @@
   .mask-reveal > * {
     display: block;
   }
+.title-pattern-bg {
+  position: relative;
+  isolation: isolate;
+  background: #f8f4ec;
+}
+
+.title-pattern-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: url("/wedding-mandala.svg") center center / 800px no-repeat;
+  opacity: 0.04;
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+  .wedding-pattern {
+    background-color: #f8f4ec;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><path d='M15 0 L30 15 L15 30 L0 15 Z' fill='none' stroke='%23b99058' stroke-width='0.6' stroke-opacity='0.12'/></svg>");
+    background-repeat: repeat;
+  }
 }
 
 @keyframes floatDrift {

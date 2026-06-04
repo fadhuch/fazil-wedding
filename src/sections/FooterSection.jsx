@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 const FooterSection = ({ eventType }) => (
-  <section id="footer" className="cinematic-section relative flex min-h-[30vh] snap-start items-center justify-center px-4 pb-40 pt-0">
+  <section id="footer" className="cinematic-section wedding-pattern relative flex min-h-[30vh] snap-start items-center justify-center px-4 pb-40 pt-0">
     <div className="mx-auto w-full max-w-4xl rounded-[2rem] border border-white/70 bg-white/55 px-6 py-16 text-center shadow-soft backdrop-blur-2xl md:px-10">
       <p className="reveal-up font-heading text-4xl leading-tight text-ink md:text-6xl">Fasil & Asha</p>
       <p className="reveal-up mt-2 text-xs uppercase tracking-[0.28em] text-gold/80 md:text-sm">

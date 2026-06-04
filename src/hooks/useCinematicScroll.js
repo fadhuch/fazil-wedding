@@ -1,12 +1,10 @@
-import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export const useCinematicScroll = () => {
-  const [activeSlide, setActiveSlide] = useState(0)
-
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray('.cinematic-section')
@@ -15,28 +13,6 @@ export const useCinematicScroll = () => {
 
       sections.forEach((section, index) => {
         const isFirst = index === 0
-
-        ScrollTrigger.create({
-          trigger: section,
-          start: 'top center',
-          end: 'bottom center',
-          onEnter: () => setActiveSlide(index),
-          onEnterBack: () => setActiveSlide(index),
-        })
-
-        if (!isFirst) {
-          gsap.from(section, {
-            autoAlpha: 0,
-            y: 36,
-            duration: 0.9,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 88%',
-              toggleActions: 'play none play reset',
-            },
-          })
-        }
 
         const appearNodes = isFirst
           ? []
@@ -52,7 +28,7 @@ export const useCinematicScroll = () => {
             scrollTrigger: {
               trigger: section,
               start: 'top 82%',
-              toggleActions: 'play none play reset',
+              toggleActions: 'play none none none',
             },
           })
         }
@@ -68,7 +44,7 @@ export const useCinematicScroll = () => {
             scrollTrigger: {
               trigger: section,
               start: 'top 82%',
-              toggleActions: 'play none play reset',
+              toggleActions: 'play none none none',
             },
           })
         }
@@ -83,7 +59,7 @@ export const useCinematicScroll = () => {
             scrollTrigger: {
               trigger: section,
               start: 'top 76%',
-              toggleActions: 'play none play reset',
+              toggleActions: 'play none none none',
             },
           })
         }
@@ -100,7 +76,7 @@ export const useCinematicScroll = () => {
             scrollTrigger: {
               trigger: section,
               start: 'top 80%',
-              toggleActions: 'play none play reset',
+              toggleActions: 'play none none none',
             },
           })
         }
@@ -132,6 +108,4 @@ export const useCinematicScroll = () => {
       ctx.revert()
     }
   }, [])
-
-  return activeSlide
 }

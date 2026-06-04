@@ -30,7 +30,7 @@ const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
-    <section id="gallery" className="cinematic-section relative  snap-start px-4 pt-20 md:py-24">
+    <section id="gallery" className="cinematic-section wedding-pattern relative snap-start px-4 pt-20 md:py-24">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           eyebrow="Moments to Treasure"
@@ -49,7 +49,7 @@ const GallerySection = () => {
               <img
                 src={image.src}
                 alt={image.alt}
-                loading="lazy"
+                loading="eager"
                 style={{ filter: 'opacity(0.5)' }}
                 className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />

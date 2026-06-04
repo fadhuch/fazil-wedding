@@ -3,7 +3,7 @@ import SectionTitle from '../components/SectionTitle'
 import PropTypes from 'prop-types'
 
 const EventDetailsSection = ({ eventType }) => (
-  <section id="details" className="cinematic-section relative min-h-screen snap-start px-4 py-20 md:py-24">
+  <section id="details" className="cinematic-section wedding-pattern relative min-h-screen snap-start px-4 py-20 md:py-24">
     <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_15%_15%,rgba(243,219,212,0.5),transparent_45%),radial-gradient(circle_at_85%_90%,rgba(216,181,122,0.3),transparent_40%)]" />
 
     <div className="mx-auto flex max-w-5xl flex-col justify-center">
