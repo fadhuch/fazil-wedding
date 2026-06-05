@@ -3,6 +3,10 @@ import islamicLamp from '../assets/lamp1.png'
 const topLayerLampIds = new Set([2, 5])
 const lowLayerLampIds = new Set([9, 12])
 const topLampZIndex = 50
+const forcedLampLeft = {
+  4: 8,
+  10: 90,
+}
 const randomOpacity = () => Number((0.28 + Math.random() * 0.32).toFixed(2))
 
 const lampAnchors = [
@@ -30,7 +34,7 @@ const lamps = Array.from({ length: 13 }, (_, index) => {
 
   return {
     id: seed,
-    left: `${Math.max(2, Math.min(94, anchor.left + jitterLeft))}%`,
+    left: `${forcedLampLeft[seed] ?? Math.max(2, Math.min(94, anchor.left + jitterLeft))}%`,
     top: `${Math.max(8, Math.min(90, anchor.top + jitterTop))}%`,
     size: 35 + ((seed * 17) % 20),
     opacity: randomOpacity(),

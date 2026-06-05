@@ -37,14 +37,14 @@ const EventDetailsSection = ({ eventType }) => (
                 <HiMiniClock className="float-deco mt-0.5 text-gold" size={20} />
                 <div>
                   <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Time</p>
-                  <p className="mt-1 text-base">After Dhuhr Prayer · 1:30 PM</p>
+                  <p className="mt-1 text-base">11:00 AM</p>
                 </div>
               </li>
               <li className="reveal-up flex items-start gap-3">
                 <HiMapPin className="float-deco mt-0.5 text-gold" size={20} />
                 <div>
                   <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Venue</p>
-                  <p className="mt-1 text-base">Koduvally, Malappuram, Kerala</p>
+                  <p className="mt-1 text-base">Parappanpoyil, Kozhikode, Kerala</p>
                 </div>
               </li>
             </ul>
@@ -77,7 +77,7 @@ const EventDetailsSection = ({ eventType }) => (
                 <HiMiniClock className="float-deco mt-0.5 text-gold" size={20} />
                 <div>
                   <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Time</p>
-                  <p className="mt-1 text-base">6:00 PM onwards</p>
+                  <p className="mt-1 text-base">4:00 PM - 9:00 PM</p>
                 </div>
               </li>
               <li className="reveal-up flex items-start gap-3">

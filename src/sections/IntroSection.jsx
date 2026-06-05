@@ -38,10 +38,10 @@ const IntroSection = ({ eventType }) => (
       </p>
       <p className="reveal-up mt-4 text-xs uppercase tracking-[0.3em] text-gold/90 md:text-sm">
         {eventType === 'Nikkah'
-          ? '12th July 2026 - Koduvally, Malappuram'
+          ? '12th July 2026 - Parappanpoyil, Kozhikode'
           : eventType === 'Wedding'
             ? '13th July 2026 - Kuttippuram'
-            : '12th - 13th July 2026 - Koduvally & Kuttippuram'}
+            : '12th - 13th July 2026 - Parappanpoyil & Kuttippuram'}
       </p>
     </div>
 

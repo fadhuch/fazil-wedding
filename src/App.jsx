@@ -25,7 +25,6 @@ function App({ eventType }) {
   return (
     <div className="relative overflow-x-hidden bg-ivory text-ink">
       <CandleOverlay />
-      <MusicPlayer />
       <Navbar />
 
       <main className="relative">

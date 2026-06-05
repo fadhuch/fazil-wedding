@@ -130,14 +130,14 @@ export const useCinematicScroll = () => {
           stagger: 0.1,
         })
 
-        if (sections.length >= 3) {
+        if (sections.length >= 2) {
           gsap.to('.candle-overlay', {
             autoAlpha: 0,
             ease: 'none',
             scrollTrigger: {
-              trigger: sections[2],
-              start: 'bottom bottom',
-              end: 'bottom top',
+              trigger: sections[1],
+              start: 'top top',
+              end: 'center top',
               scrub: true,
             },
           })
