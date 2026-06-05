@@ -44,7 +44,7 @@ const EventDetailsSection = ({ eventType }) => (
                 <HiMapPin className="float-deco mt-0.5 text-gold" size={20} />
                 <div>
                   <p className="text-xs uppercase tracking-[0.28em] text-gold/85">Venue</p>
-                  <p className="mt-1 text-base">Parappanpoyil, Kozhikode, Kerala</p>
+                  <p className="mt-1 text-base">Hi Land Convention Centre Parappanpoyil, Kozhikode, Kerala</p>
                 </div>
               </li>
             </ul>
