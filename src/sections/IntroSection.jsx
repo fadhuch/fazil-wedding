@@ -24,26 +24,53 @@ const IntroSection = ({ eventType }) => (
 
     <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_40%,rgba(255,240,219,0.55),transparent_55%)]" />
 
-    <div className="relative z-10 mx-auto w-full max-w-4xl rounded-[2rem] border border-white/45 bg-white/25 px-6 py-20 text-center shadow-soft backdrop-blur-sm md:px-10">
-      <p className="reveal-up mb-3 text-[10px] uppercase tracking-[0.4em]  md:text-xs">
-        Wedding Invitation
-      </p>
-      <p className="mask-reveal  overflow-hidden font-heading text-5xl leading-[0.95] text-ink md:text-8xl">
-        <span className="block text-gold">FASIL</span>
-        <span className="block text-gold" style={{fontSize: '40px'}}>&</span>
-        <span className="block text-gold">ASHA</span>
-      </p>
-      <p className="reveal-up mt-5 text-sm italic tracking-[0.03em] text-ink/75 md:text-base">
-        Together with their families, joyfully invite you to celebrate the blessing of their union.
-      </p>
-      <p className="reveal-up mt-4 text-xs uppercase tracking-[0.3em] text-gold/90 md:text-sm">
-        {eventType === 'Nikkah'
-          ? '12th July 2026 - Parappanpoyil, Kozhikode'
-          : eventType === 'Wedding'
-            ? '13th July 2026 - Kuttippuram'
-            : '12th - 13th July 2026 - Parappanpoyil & Kuttippuram'}
-      </p>
-    </div>
+<div className="relative z-10 mx-auto w-full max-w-4xl rounded-[2rem] border border-white/45 bg-white/25 px-6 py-20 text-center shadow-soft backdrop-blur-sm md:px-10">
+  <p className="reveal-up mb-3 text-[10px] uppercase tracking-[0.4em] md:text-xs">
+    Wedding Invitation
+  </p>
+
+<p className="mask-reveal overflow-hidden font-heading text-5xl leading-[0.95] text-ink md:text-8xl">
+  <span className="block text-gold">FASIL</span>
+</p>
+
+<div className="reveal-up mt-3 text-sm md:text-base text-ink/80 leading-relaxed">
+  <p>Son of</p>
+  <p>Fasaluddeen Kadavathu Parambil Marakkar</p>
+  <p>Rasheeda Parambil</p>
+</div>
+
+<p
+  className="mt-4 mb-4 font-heading text-gold"
+  style={{ fontSize: '40px' }}
+>
+  &
+</p>
+
+<p className="mask-reveal overflow-hidden font-heading text-5xl leading-[0.95] text-ink md:text-8xl">
+  <span className="block text-gold">ASHA</span>
+</p>
+
+<div className="reveal-up mt-3 text-sm md:text-base text-ink/80 leading-relaxed">
+  <p>Daughter of</p>
+  <p>Maliyekkal Muhammed</p>
+  <p>Amina Tottathil</p>
+</div>
+
+<p className="reveal-up mt-8 text-sm italic tracking-[0.03em] text-ink/75 md:text-base">
+  Together with their families, joyfully invite you to celebrate the blessing
+  of their union.
+</p>
+
+<p className="reveal-up mt-4 text-xs uppercase tracking-[0.3em] text-gold/90 md:text-sm">
+  {eventType === 'Nikkah'
+    ? '12th July 2026 - Parappanpoyil, Kozhikode'
+    : eventType === 'Wedding'
+      ? '13th July 2026 - Kuttippuram'
+      : '12th - 13th July 2026 - Parappanpoyil & Kuttippuram'}
+</p>
+
+</div>
+
 
     <div className="pointer-events-none absolute inset-0 z-[2]">
       {particles.map((p) => (
