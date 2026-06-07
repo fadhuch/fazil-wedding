@@ -35,7 +35,10 @@ const FooterSection = ({ eventType }) => (
         </p>
         <p>Son of</p>
         <p>Fasaluddeen Kadavathu Parambil Marakkar</p>
-        <p>Rasheeda Parambil</p>
+          <p>Rasheeda Parambil</p>
+          <p>&</p>
+          <p>Beloved brother of</p>
+          <p>Femina and Arfaz</p>
       </div>
 
       <div>
